@@ -56,6 +56,11 @@ export default {
         if (hours >= 10) {
           return `${hours}h`;
         }
+        if (hours > 1) {
+          const minutes = Math.floor(secondsLeft / 60) % 60;
+          const mm = `${minutes < 10 ? '0' : ''}${minutes}`;
+          return `${hours}:${mm}`;
+        }
       }
       return intoCountdownString(secondsLeft);
     },
