@@ -50,6 +50,15 @@ export default {
 
       document.body.style.background = s.background || fallback.background;
     },
+    titleCountdown(secondsLeft) {
+      if (secondsLeft >= 0 && secondsLeft <= 60 * 60 * 24) {
+        const hours = Math.floor(secondsLeft / 60 / 60);
+        if (hours >= 10) {
+          return `${hours}h`;
+        }
+      }
+      return intoCountdownString(secondsLeft);
+    },
   },
   watch: {
     styling: {
@@ -60,7 +69,7 @@ export default {
     },
     totalSecondsLeft: {
       handler(secondsLeft) {
-        document.title = `${intoCountdownString(secondsLeft)} - stevenson.space`;
+        document.title = `${this.titleCountdown(secondsLeft)} - stevenson.space`;
       },
       immediate: true,
     },
